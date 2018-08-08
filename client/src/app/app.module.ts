@@ -15,14 +15,19 @@ import { RegisterComponent } from './register/register.component';
 import {ValidateService} from './services/validate.service';
 import {AuthService} from './services/auth.service';
 import {FlashMessagesModule} from 'angular2-flash-messages';
-import { AuthGuard } from './guard/auth.guard';
+// import { AuthGuard } from './guard/auth.guard';
+// import { JwtHelperService } from '@auth0/angular-jwt';
 
 const appRoutes: Routes =  [
   {path:'', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
-  {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-  {path:'profile', component: ProfileComponent,  canActivate:[AuthGuard]}
+  {path:'dashboard', component: DashboardComponent},
+  {path:'profile', component: ProfileComponent}
+
+  // ==== Dont mind this code, I am working on it...=======================
+  // {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
+  // {path:'profile', component: ProfileComponent,  canActivate:[AuthGuard]}
 ]
 
 @NgModule({
@@ -40,9 +45,9 @@ const appRoutes: Routes =  [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
